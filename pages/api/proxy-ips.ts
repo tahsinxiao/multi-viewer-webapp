@@ -24,14 +24,6 @@ const MIN_PROXIES_REQUIRED = 8
 // Free proxy providers
 const proxyProviders = [
   {
-    name: 'free-proxy-list',
-    url: 'https://free-proxy-list.net/',
-    parser: async () => {
-      // This would require scraping, fallback to API endpoint
-      return fetchFromAPI('https://www.proxy-list.download/api/v1/get?type=http')
-    }
-  },
-  {
     name: 'proxy-list-api',
     url: 'https://www.proxy-list.download/api/v1/get?type=http'
   },
@@ -40,8 +32,8 @@ const proxyProviders = [
     url: 'https://api.proxyscrape.com/v2/?request=get&protocol=http&timeout=10000&ssl=all&anonymity=all&country=all&simplify=true&limit=5'
   },
   {
-    name: 'free-ipv4',
-    url: 'https://free-proxy-list.net/json.php'
+    name: 'free-proxies',
+    url: 'https://www.freeproxylists.net/?type=http&anon=elite'
   }
 ]
 
