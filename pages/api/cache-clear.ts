@@ -36,3 +36,4 @@ export default function handler(
       clearedAt: 0
     })
   }
+}
