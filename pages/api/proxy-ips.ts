@@ -18,10 +18,9 @@ let proxyCache: CachedProxies = {
   lastUpdated: 0
 }
 
-const CACHE_DURATION = 15 * 60 * 1000 // 15 minutes
+const CACHE_DURATION = 15 * 60 * 1000
 const MIN_PROXIES_REQUIRED = 8
 
-// Free proxy providers
 const proxyProviders = [
   {
     name: 'proxy-list-api',
@@ -30,10 +29,6 @@ const proxyProviders = [
   {
     name: 'proxyscrape',
     url: 'https://api.proxyscrape.com/v2/?request=get&protocol=http&timeout=10000&ssl=all&anonymity=all&country=all&simplify=true&limit=5'
-  },
-  {
-    name: 'free-proxies',
-    url: 'https://www.freeproxylists.net/?type=http&anon=elite'
   }
 ]
 
@@ -88,7 +83,6 @@ async function fetchProxiesFromProvider(provider: typeof proxyProviders[0]): Pro
 async function fetchFreshProxies(): Promise<ProxyIP[]> {
   const allProxies: ProxyIP[] = []
 
-  // Fetch from multiple providers in parallel
   const promises = proxyProviders.map(provider => fetchProxiesFromProvider(provider))
   const results = await Promise.all(promises)
 
@@ -96,7 +90,6 @@ async function fetchFreshProxies(): Promise<ProxyIP[]> {
     allProxies.push(...proxies)
   })
 
-  // Sort by score (freshness) and remove duplicates
   const uniqueProxies = Array.from(
     new Map(allProxies.map(p => [`${p.ip}:${p.port}`, p])).values()
   )
@@ -133,4 +126,3 @@ export default async function handler(
       nextRefresh: proxyCache.lastUpdated + CACHE_DURATION
     })
   }
-}

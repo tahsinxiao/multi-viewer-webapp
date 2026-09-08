@@ -19,10 +19,7 @@ export default function handler(
   }
 
   try {
-    // Clear browser cache headers
     res.setHeader('Clear-Site-Data', '"cache", "cookies", "storage"')
-    
-    // Set response headers to prevent caching
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
     res.setHeader('Pragma', 'no-cache')
     res.setHeader('Expires', '0')
@@ -39,4 +36,3 @@ export default function handler(
       clearedAt: 0
     })
   }
-}

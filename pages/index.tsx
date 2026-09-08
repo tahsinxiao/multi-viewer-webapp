@@ -20,10 +20,9 @@ export default function Home() {
     nextRefresh: 0
   })
 
-  // Fetch proxies on component mount and setup auto-refresh
   useEffect(() => {
     fetchProxies()
-    const interval = setInterval(fetchProxies, 15 * 60 * 1000) // Refresh every 15 minutes
+    const interval = setInterval(fetchProxies, 15 * 60 * 1000)
     return () => clearInterval(interval)
   }, [])
 
@@ -47,9 +46,7 @@ export default function Home() {
   const clearCache = async () => {
     try {
       await fetch('/api/cache-clear', { method: 'POST' })
-      // Also clear localStorage
       localStorage.clear()
-      // Clear session storage
       sessionStorage.clear()
       alert('Cache cleared successfully!')
       window.location.reload()
@@ -83,7 +80,6 @@ export default function Home() {
         <title>WellViewer - Multi-Viewer Web App</title>
         <meta name="description" content="Advanced multi-viewer with 8 tabs and dynamic proxy rotation" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.container}>
@@ -140,4 +136,3 @@ export default function Home() {
       </main>
     </>
   )
-}

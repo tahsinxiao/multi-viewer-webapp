@@ -35,7 +35,6 @@ export default function ViewerTab({
     let urlToNavigate = inputValue.trim()
     if (!urlToNavigate) return
 
-    // Add protocol if missing
     if (!urlToNavigate.startsWith('http://') && !urlToNavigate.startsWith('https://')) {
       urlToNavigate = 'https://' + urlToNavigate
     }
@@ -50,7 +49,7 @@ export default function ViewerTab({
   }
 
   const handleRefresh = () => {
-    if (iframeRef.current) {
+    if (iframeRef.current && url) {
       iframeRef.current.src = url
     }
   }
@@ -73,7 +72,7 @@ export default function ViewerTab({
       <div className={styles.urlBar}>
         <input
           type="text"
-          placeholder="Enter URL or search..."
+          placeholder="Enter URL..."
           value={inputValue}
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
@@ -105,4 +104,3 @@ export default function ViewerTab({
       </div>
     </div>
   )
-}
