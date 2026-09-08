@@ -1,10 +1,4 @@
 {
-  "env": [
-    {
-      "key": "NEXT_PUBLIC_PROXY_CACHE_DURATION",
-      "value": "900000"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
